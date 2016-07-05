@@ -28,6 +28,7 @@ public class UserController {
         User user=new User();
         user.setId(id);
         user.setName("zha");
+//        User user2=userDao.findById(7L);
         userDao.save(user);
         return this.setResult(0,"",user);
     }
@@ -35,8 +36,14 @@ public class UserController {
     @RequestMapping(value = "/one",method = RequestMethod.GET)
     public @ResponseBody Object getList(){
         List<User> users;
-        users=userDao.findByIdAndName(7L,"zha");
+        users = userDao.findByIdAndName(7L,"zha");
         logger.info("getLinst" + " " + users);
+        return this.setResult(0,"",users);
+    }
+    @RequestMapping(value = "/top",method = RequestMethod.GET)
+    public @ResponseBody Object getTop(){
+        List<User> users = null;
+        users = userDao.findTop2ByName("zha");
         return this.setResult(0,"",users);
     }
     private Map<String, Object> setResult(int code, String msg, Object data) {
@@ -47,4 +54,10 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    public @ResponseBody Object getAll(){
+        Iterable<User> userList;
+        userList = userDao.findAll();
+        return this.setResult(0,"",userList);
+    }
 }

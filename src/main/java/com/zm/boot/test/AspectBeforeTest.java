@@ -17,4 +17,5 @@ public class AspectBeforeTest {
         //if(logAspect == null)
         hello.foo();
     }
+
 }
